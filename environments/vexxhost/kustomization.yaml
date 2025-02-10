@@ -5,6 +5,7 @@ components:
 - ../../components/kustomizeconfig
 
 resources:
+- ../../bases/orcdemo
 - external-network.yaml
 - default-securitygroup.yaml
 - flavors.yaml

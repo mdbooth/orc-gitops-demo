@@ -1,0 +1,13 @@
+---
+apiVersion: openstack.k-orc.cloud/v1alpha1
+kind: Flavor
+metadata:
+  name: small
+spec:
+  cloudCredentialsRef:
+    cloudName: openstack
+    secretName: cloud-config
+  managementPolicy: unmanaged
+  import:
+    # 1vcpu_2gb
+    id: 7d195b15-271f-40e7-9ceb-15b4b47c75d8

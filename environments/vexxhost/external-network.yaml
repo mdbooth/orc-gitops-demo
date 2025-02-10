@@ -1,0 +1,27 @@
+---
+apiVersion: openstack.k-orc.cloud/v1alpha1
+kind: Network
+metadata:
+  name: external
+spec:
+  cloudCredentialsRef:
+    cloudName: openstack
+    secretName: cloud-config
+  managementPolicy: unmanaged
+  import:
+    # 'public' on vexxhost
+    id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+---
+apiVersion: openstack.k-orc.cloud/v1alpha1
+kind: Subnet
+metadata:
+  name: external-ipv4
+spec:
+  cloudCredentialsRef:
+    cloudName: openstack
+    secretName: cloud-config
+  managementPolicy: unmanaged
+  networkRef: external
+  import:
+    filter:
+      ipVersion: 4

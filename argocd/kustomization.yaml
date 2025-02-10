@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: argocd
+
+resources:
+- namespace.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/refs/tags/v2.14.2/manifests/install.yaml
+
+configMapGenerator:
+- name: argocd-cm
+  behavior: replace
+  files:
+  - resource.customizations
+  options:
+    disableNameSuffixHash: true
+    labels:
+      app.kubernetes.io/part-of: argocd

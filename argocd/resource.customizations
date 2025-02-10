@@ -1,0 +1,31 @@
+openstack.k-orc.cloud/*:
+    health.lua:
+        hs = {}
+        if obj.status ~= nil then
+            if obj.status.conditions ~= nil then
+                for i, condition in ipairs(obj.status.conditions) do
+                    if condition.type == "Progressing" then
+                        hs.message = condition.message
+
+                        if condition.status == "False" then
+                            if condition.reason == "Success" then
+                                hs.status = "Healthy"
+                            else
+                                hs.status = "Degraded"
+                            end
+                        else
+                            if hs.reason == "TransientError" then
+                                hs.status = "Degraded"
+                            else
+                                hs.status = "Progressing"
+                            end
+                        end
+                        return hs
+                    end
+                end
+            end
+        end
+
+        hs.status = "Progressing"
+        hs.message = "Waiting for ORC"
+        return hs

@@ -1,0 +1,27 @@
+---
+apiVersion: openstack.k-orc.cloud/v1alpha1
+kind: Network
+metadata:
+  name: external
+spec:
+  cloudCredentialsRef:
+    cloudName: openstack
+    secretName: cloud-config
+  managementPolicy: unmanaged
+  import:
+    # 'provider' on nerc
+    id: 0b1e8400-7d6d-4267-8a7f-100b4fc9b2f1
+---
+apiVersion: openstack.k-orc.cloud/v1alpha1
+kind: Subnet
+metadata:
+  name: external-ipv4
+spec:
+  cloudCredentialsRef:
+    cloudName: openstack
+    secretName: cloud-config
+  managementPolicy: unmanaged
+  networkRef: external
+  import:
+    filter:
+      ipVersion: 4

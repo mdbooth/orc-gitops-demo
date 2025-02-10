@@ -24,5 +24,5 @@ spec:
   networkRef: external
   import:
     filter:
-      name: public-1
+      name: public-2
       ipVersion: 4
